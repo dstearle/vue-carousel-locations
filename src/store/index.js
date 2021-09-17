@@ -45,8 +45,21 @@ const actions = {
 
 };
 
+// Getters
+const getters = {
+    
+  // Getter for custom post types of 'menu'
+  menuPostsDataGet: state => {
+      
+      return state.menuPostsData;
+      
+  },
+
+};
+
 export default createStore({
   state,
   mutations,
   actions,
+  getters
 })
