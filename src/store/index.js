@@ -27,10 +27,23 @@ const mutations = {
     }).then((data)=>{
         state.menuPostsData = data;
     })
-            
-},
+              
+  },
 
-}
+};
+
+// Actions
+const actions = {
+
+  // Action for fetching metadata for custom post type of 'location'
+  fetchLocPosts: ({ commit }, order) => {
+      
+      // Commints fetch for custom post type of 'location'
+      commit('SET_LOCPOSTS', order);
+      
+  },
+
+};
 
 export default createStore({
   state,
