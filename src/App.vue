@@ -19,7 +19,7 @@ export default {
 
   mounted() {
     // Fetches all meta data for 'location' custom post type
-    this.fetchMenuPosts();
+    this.fetchLocPosts();
   },
 
   computed: {
@@ -27,7 +27,7 @@ export default {
     ...mapGetters({
         
         // Retrieves the data for 'menu' custom post type
-        menuPostsDataGet: 'menuPostsDataGet',
+        locPostsDataGet: 'locPostsDataGet',
         
     }),
 
@@ -36,7 +36,7 @@ export default {
   methods: {
 
     ...mapActions({
-        fetchMenuPosts: 'fetchMenuPosts',
+        fetchLocPosts: 'fetchLocPosts',
     }),
 
   },
