@@ -12,10 +12,10 @@ const state = {
 const mutations = {
 
   // Sets the state data for menuPostsData
-  'SET_LOCPOSTS' (state) {
+  'SET_MENUPOSTS' (state) {
 
     // Test URL for the custom post type
-    var url = window.menu.protocol + '//' + window.menu.hostname + '/kog-champps-v2/wp-json/wp/v2/menu?filter[orderby]=date&per_page=100';
+    var url = window.location.protocol + '//' + window.location.hostname + '/kog-champps-v2/wp-json/wp/v2/menu?filter[orderby]=date&per_page=100';
 
     // Live URL for the custom post type
     // var url = window.menu.protocol + '//' + window.menu.hostname + '/wp-json/wp/v2/menu?filter[orderby]=date&per_page=100';
@@ -35,11 +35,11 @@ const mutations = {
 // Actions
 const actions = {
 
-  // Action for fetching metadata for custom post type of 'location'
-  fetchLocPosts: ({ commit }, order) => {
+  // Action for fetching metadata for custom post type of 'menu'
+  fetchMenuPosts: ({ commit }, order) => {
       
-      // Commints fetch for custom post type of 'location'
-      commit('SET_LOCPOSTS', order);
+    // Commints fetch for custom post type of 'menu'
+    commit('SET_MENUPOSTS', order);
       
   },
 
@@ -51,7 +51,7 @@ const getters = {
   // Getter for custom post types of 'menu'
   menuPostsDataGet: state => {
       
-      return state.menuPostsData;
+    return state.menuPostsData;
       
   },
 
