@@ -52,9 +52,13 @@
                 // Array to hold the post metadata
                 const arr = this.locSpecials;
 
-                // The array of image IDs for the Specials Carousel images
+                // The string of image IDs for the Specials carousel images
                 const arr2 = arr.metaval.specials_carousel_id[0];
-                console.log(arr2)
+
+                // Set the string as an array
+                const arr3 = arr2.split(",");
+
+                console.log(arr3)
 
             }
 
