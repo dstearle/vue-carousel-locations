@@ -18,15 +18,17 @@ export default {
   components: { Carousel },
 
   mounted() {
+
     // Fetches all meta data for 'location' custom post type
     this.fetchLocPosts();
+	
   },
 
   computed: {
 
     ...mapGetters({
         
-        // Retrieves the data for 'menu' custom post type
+        // Retrieves the state for the retrieved custom post type
         locPostsDataGet: 'locPostsDataGet',
         
     }),
@@ -36,7 +38,10 @@ export default {
   methods: {
 
     ...mapActions({
+
+		// Retrieves the data for 'location' custom post type
         fetchLocPosts: 'fetchLocPosts',
+
     }),
 
   },

@@ -3,11 +3,12 @@
     <div class="slideshow-container">
         
         <!-- Slide One -->
-        <div class="my-slides fade">
+        <!-- <div class="my-slides fade">
 
             <img src="wp-content/plugins/vue-carousel/dist/images/gramobilebanner4.jpg">
 
-        </div>
+        </div> -->
+        <div class="my-slides fade">1</div>
 
         <!-- Next Button -->
         <a class="prev" @click="plusSlides(-1)">&#10094;</a>
@@ -41,6 +42,22 @@
 
             };
             
+        },
+
+        computed: {
+
+            // The filtered list based off of selected tag
+            filteredList() {
+
+                // Array to hold the post metadata
+                const arr = this.locSpecials;
+
+                // The array of image IDs for the Specials Carousel images
+                const arr2 = arr.metaval.specials_carousel_id[0];
+                console.log(arr2)
+
+            }
+
         },
 
         methods: {
