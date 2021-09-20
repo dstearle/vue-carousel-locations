@@ -9,20 +9,6 @@
 
         </div>
 
-        <!-- Slide Two -->
-        <div class="my-slides fade">
-
-            <img src="wp-content/plugins/vue-carousel/dist/images/img_snow_wide.jpg">
-
-        </div>
-
-        <!-- Slide Three -->
-        <div class="my-slides fade">
-
-            <img src="wp-content/plugins/vue-carousel/dist/images/img_lights_wide.jpg">
-
-        </div>
-
         <!-- Next Button -->
         <a class="prev" @click="plusSlides(-1)">&#10094;</a>
 
@@ -43,6 +29,8 @@
             this.showSlides(this.slideIndex);
 
         },
+
+        props: ["locSpecials"],
 
         data() {
 

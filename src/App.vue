@@ -1,7 +1,7 @@
 <template>
 
     <!-- Carousel Component -->
-    <Carousel />
+    <Carousel :locSpecials="this.locPostsDataGet"/>
 
 </template>
 

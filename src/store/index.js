@@ -15,7 +15,7 @@ const mutations = {
   'SET_LOCPOSTS' (state) {
 
     // Test URL for the custom post type
-    var url = window.location.protocol + '//' + window.location.hostname + '/kog-champps-v2/wp-json/wp/v2/location?filter[orderby]=date&per_page=100';
+    var url = window.location.protocol + '//' + window.location.hostname + '/kog-champps-v2/wp-json/wp/v2/location/17';
 
     // Live URL for the custom post type
     // var url = window.location.protocol + '//' + window.location.hostname + '/wp-json/wp/v2/location?filter[orderby]=date&per_page=100';
