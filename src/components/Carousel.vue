@@ -6,15 +6,22 @@
         <div class="my-slides fade">
 
             <div v-if="this.loaded" >
-                
-                <img src="https://localhost/kog-champps-v2/wp-content/uploads/2021/09/Margarita.jpg" />
+
+                <div v-for="(locSpecial, index) in locSpecials" :key="index">
+
+                    <div class="my-slides fade">
+
+                        <img :src="locSpecial" />
+
+                    </div>
+
+                </div>
 
             </div>
             
             <div v-else>Loading</div>
 
         </div>
-        <!-- <div class="my-slides fade">{{ filteredList }}</div> -->
 
         <!-- Next Button -->
         <a class="prev" @click="plusSlides(-1)">&#10094;</a>
@@ -58,21 +65,13 @@
             // The filtered list based off of selected tag
             filteredList() {
 
-                // Array to hold the post metadata
+                // Array to hold the array if image urls
                 const arr = this.locSpecials;
 
-                // If the metadata has been fetched
+                // If the data has been fetched
                 if(arr) {
 
-                    // The string of carousel image ids from the post
-                    const arr2 = arr.metaval.specials_carousel_id[0];
-
-                    // Split the string into an array
-                    const arr3 = arr2.split(",")
-
-                    console.log(arr)
-
-                    return arr3
+                    return arr
                     
                 }
                 
