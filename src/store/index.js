@@ -21,7 +21,7 @@ const mutations = {
     const test2 = test.textContent;
 
     // Splits the string into an array
-    const test3 = test.split(",");
+    const test3 = test2.split(",");
 
     // Sets the state for locImageUrls with the array
     state.locImageUrls = test3;

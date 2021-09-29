@@ -1,28 +1,17 @@
 <template>
     
     <div class="slideshow-container">
-        
-        <!-- Slide One -->
-        <div class="my-slides fade">
 
-            <div v-if="this.loaded" >
+        <div v-for="(locSpecial, index) in locSpecials" :key="index">
 
-                <div v-for="(locSpecial, index) in locSpecials" :key="index">
+            <div class="my-slides fade">
 
-                    <div class="my-slides fade">
-
-                        <img :src="locSpecial" />
-
-                    </div>
-
-                </div>
+                <img :src="locSpecial" />
 
             </div>
-            
-            <div v-else>Loading</div>
 
         </div>
-
+        
         <!-- Next Button -->
         <a class="prev" @click="plusSlides(-1)">&#10094;</a>
 
