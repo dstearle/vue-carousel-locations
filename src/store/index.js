@@ -30,11 +30,11 @@ const mutations = {
 // Actions
 const actions = {
 
-  // Action for fetching metadata for custom post type of 'location'
-  fetchLocPosts: ({ commit }, order) => {
+  // Action for fetching image urls
+  fetchLocImageUrls: ({ commit }, order) => {
       
-    // Commints fetch for custom post type of 'location'
-    commit('SET_LOCPOSTS', order);
+    // Commits fetch for custom post type of 'location'
+    commit('SET_LOCIMAGEURLS', order);
       
   },
 
@@ -43,10 +43,10 @@ const actions = {
 // Getters
 const getters = {
     
-  // Getter for custom post types of 'location'
-  locPostsDataGet: state => {
+  // Getter for image urls
+  locImageUrlsGet: state => {
       
-    return state.locPostsData;
+    return state.locImageUrls;
       
   },
 
