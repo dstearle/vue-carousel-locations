@@ -18,10 +18,13 @@ const mutations = {
     const test = document.getElementById('specialsCarouselURLs');
 
     // Turns the content of the div into a string
-    let test2 = test.textContent;
+    const test2 = test.textContent;
 
-    // Sets the state for locImageUrls with the string
-    state.locImageUrls = test2;
+    // Splits the string into an array
+    const test3 = test.split(",");
+
+    // Sets the state for locImageUrls with the array
+    state.locImageUrls = test3;
               
   },
 
