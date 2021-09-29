@@ -3,12 +3,18 @@
     <div class="slideshow-container">
         
         <!-- Slide One -->
-        <!-- <div class="my-slides fade">
+        <div class="my-slides fade">
 
-            <img src="wp-content/plugins/vue-carousel/dist/images/gramobilebanner4.jpg">
+            <div v-if="this.loaded" >
+                
+                <img src="https://localhost/kog-champps-v2/wp-content/uploads/2021/09/Margarita.jpg" />
 
-        </div> -->
-        <div class="my-slides fade">{{ filteredList }}</div>
+            </div>
+            
+            <div v-else>Loading</div>
+
+        </div>
+        <!-- <div class="my-slides fade">{{ filteredList }}</div> -->
 
         <!-- Next Button -->
         <a class="prev" @click="plusSlides(-1)">&#10094;</a>
@@ -29,6 +35,8 @@
             // Sets the initial slide to be shown
             this.showSlides(this.slideIndex);
 
+            this.loaded = true
+
         },
 
         props: ["locSpecials"],
@@ -39,6 +47,7 @@
 
                 slideIndex: 0,
                 interval: setInterval(() => this.showSlides(this.slideIndex += 1), 6000),
+                loaded: false
 
             };
             
@@ -61,10 +70,13 @@
                     // Split the string into an array
                     const arr3 = arr2.split(",")
 
+                    console.log(arr)
+
                     return arr3
                     
                 }
                 
+                // Else wait till the data is fetched
                 else {}
 
             }
