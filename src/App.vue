@@ -17,7 +17,7 @@ export default {
 
   components: { Carousel },
 
-  mounted() {
+  beforeMount() {
 
     // Fetches all meta data for 'location' custom post type
     this.fetchLocPosts();

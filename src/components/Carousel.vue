@@ -8,7 +8,7 @@
             <img src="wp-content/plugins/vue-carousel/dist/images/gramobilebanner4.jpg">
 
         </div> -->
-        <div class="my-slides fade">1</div>
+        <div class="my-slides fade">{{ filteredList }}</div>
 
         <!-- Next Button -->
         <a class="prev" @click="plusSlides(-1)">&#10094;</a>
@@ -52,13 +52,20 @@
                 // Array to hold the post metadata
                 const arr = this.locSpecials;
 
-                // The string of image IDs for the Specials carousel images
-                const arr2 = arr.metaval.specials_carousel_id[0];
+                // If the metadata has been fetched
+                if(arr) {
 
-                // Set the string as an array
-                const arr3 = arr2.split(",");
+                    // The string of carousel image ids from the post
+                    const arr2 = arr.metaval.specials_carousel_id[0];
 
-                console.log(arr3)
+                    // Split the string into an array
+                    const arr3 = arr2.split(",")
+
+                    return arr3
+                    
+                }
+                
+                else {}
 
             }
 
