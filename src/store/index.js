@@ -3,30 +3,25 @@ import { createStore } from 'vuex'
 // State
 const state = {
     
-  // Array to store custom post types of 'location'
-  locPostsData: [],
+  // Array to store the image urls
+  locImageUrls: '',
   
 };
 
 // Mutations
 const mutations = {
 
-  // Sets the state data for locPostsData
-  'SET_LOCPOSTS' (state) {
+  // Sets the state data for locImageUrls
+  'SET_LOCIMAGEURLS' (state) {
 
-    // Test URL for the custom post type
-    var url = window.location.protocol + '//' + window.location.hostname + '/kog-champps-v2/wp-json/wp/v2/location/17';
+    // Searches for the div on the page with an id of "specialsCarouselURLs"
+    const test = document.getElementById('specialsCarouselURLs');
 
-    // Live URL for the custom post type
-    // var url = window.location.protocol + '//' + window.location.hostname + '/wp-json/wp/v2/location?filter[orderby]=date&per_page=100';
-    
-    // Fetches the location posts from WordPress and sets them to the locPostsData array in the state
-    fetch(url).then(
-        (response)=>{
-        return response.json()
-    }).then((data)=>{
-        state.locPostsData = data;
-    })
+    // Turns the content of the div into a string
+    let test2 = test.textContent;
+
+    // Sets the state for locImageUrls with the string
+    state.locImageUrls = test2;
               
   },
 
