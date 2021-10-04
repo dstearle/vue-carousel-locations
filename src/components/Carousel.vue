@@ -6,7 +6,12 @@
 
             <div class="my-slides fade">
 
-                <img :src="locSpecial" />
+                <img 
+                    :src="locSpecial" 
+                    alt=""
+                    class=""
+                    style="width: 100%; max-height: 600px"
+                />
 
             </div>
 
