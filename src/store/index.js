@@ -15,13 +15,13 @@ const mutations = {
   'SET_LOCIMAGEURLS' (state) {
 
     // Searches for the div on the page with an id of "specialsCarouselURLs"
-    const test = document.getElementById('specialsCarouselURLs');
+    const test = document.getElementById('crest');
 
     // Turns the content of the div into a string
     const test2 = test.textContent;
 
     // Splits the string into an array
-    const test3 = test2.split(",");
+    const test3 = JSON.parse(test2);
 
     // Sets the state for locImageUrls with the array
     state.locImageUrls = test3;
