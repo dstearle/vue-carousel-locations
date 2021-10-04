@@ -7,8 +7,11 @@
 
             <div class="my-slides fade">
 
-                <!-- Link for special -->
-                <a :href="locSpecial.imageLink">
+                <!--If a link is provided -->
+                <a 
+                    v-if="locSpecial.imageLink"
+                    :href="locSpecial.imageLink"
+                >
 
                     <!-- Image -->
                     <img 
@@ -19,6 +22,15 @@
                     />
 
                 </a>
+
+                <!-- Else just show the image -->
+                <img 
+                    v-else
+                    :src="locSpecial.imageUrl" 
+                    alt=""
+                    class=""
+                    style="width: 100%; max-height: 600px"
+                />
 
             </div>
 
