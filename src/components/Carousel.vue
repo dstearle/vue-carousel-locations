@@ -2,16 +2,23 @@
     
     <div class="slideshow-container">
 
+        <!-- For loop to loop through each data object -->
         <div v-for="(locSpecial, index) in locSpecials" :key="index">
 
             <div class="my-slides fade">
 
-                <img 
-                    :src="locSpecial.imageUrl" 
-                    alt=""
-                    class=""
-                    style="width: 100%; max-height: 600px"
-                />
+                <!-- Link for special -->
+                <a :href="locSpecial.imageLink">
+
+                    <!-- Image -->
+                    <img 
+                        :src="locSpecial.imageUrl" 
+                        alt=""
+                        class=""
+                        style="width: 100%; max-height: 600px"
+                    />
+
+                </a>
 
             </div>
 
