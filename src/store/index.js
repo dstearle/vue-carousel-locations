@@ -3,28 +3,28 @@ import { createStore } from 'vuex'
 // State
 const state = {
     
-  // Array to store the image urls
-  locImageUrls: '',
+  // Array to store the image data
+  locImageData: '',
   
 };
 
 // Mutations
 const mutations = {
 
-  // Sets the state data for locImageUrls
-  'SET_LOCIMAGEURLS' (state) {
+  // Sets the state data for locImageData
+  'SET_LOCIMAGEDATA' (state) {
 
-    // Searches for the div on the page with an id of "specialsCarouselURLs"
-    const test = document.getElementById('crest');
+    // Searches for the div on the page with an id of "specialsCarouselData"
+    const arr = document.getElementById('specialsCarouselData');
 
     // Turns the content of the div into a string
-    const test2 = test.textContent;
+    const arr2 = arr.textContent;
 
-    // Splits the string into an array
-    const test3 = JSON.parse(test2);
+    // Parses the string into an array
+    const arr3 = JSON.parse(arr2);
 
-    // Sets the state for locImageUrls with the array
-    state.locImageUrls = test3;
+    // Sets the state for locImageData with the array
+    state.locImageData = arr3;
               
   },
 
@@ -33,11 +33,11 @@ const mutations = {
 // Actions
 const actions = {
 
-  // Action for fetching image urls
-  fetchLocImageUrls: ({ commit }, order) => {
+  // Action for fetching image data
+  fetchLocImageData: ({ commit }, order) => {
       
     // Commits fetch for custom post type of 'location'
-    commit('SET_LOCIMAGEURLS', order);
+    commit('SET_LOCIMAGEDATA', order);
       
   },
 
@@ -46,10 +46,10 @@ const actions = {
 // Getters
 const getters = {
     
-  // Getter for image urls
-  locImageUrlsGet: state => {
+  // Getter for image data
+  locImageDataGet: state => {
       
-    return state.locImageUrls;
+    return state.locImageData;
       
   },
 
