@@ -124,15 +124,11 @@
 
     /* Slideshow container */
     .slideshow-container {
-        max-height: 30rem;
-        width: 100%;
         position: relative;
     }
 
     /* Hide the images by default */
     .my-slides {
-        height: auto;
-        width: 100%;
         display: none;
     }
 
@@ -182,6 +178,20 @@
     @keyframes fade {
         from {opacity: .4}
         to {opacity: 1}
+    }
+
+    @media only screen and (max-width: 1024px) {
+
+        .my-slide-desktop { display: none; }
+        .my-slide-mobile { display: block; }
+
+    }
+
+    @media only screen and (min-width: 1024px) {
+
+        .my-slide-desktop { display: block; }
+        .my-slide-mobile { display: none; }
+
     }
 
 </style>
