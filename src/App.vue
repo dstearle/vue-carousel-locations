@@ -1,7 +1,7 @@
 <template>
 
     <!-- Carousel Component -->
-    <Carousel :locSpecials="this.locImageUrlsGet"/>
+    <Carousel :locSpecials="this.locImageDataGet"/>
 
 </template>
 
@@ -20,7 +20,7 @@ export default {
   beforeMount() {
 
     // Fetches the image urls to be used by the carousel
-    this.fetchLocImageUrls();
+    this.fetchLocImageData();
 	
   },
 
@@ -29,7 +29,7 @@ export default {
     ...mapGetters({
         
         // Retrieves the state for the retrieved custom post type
-        locImageUrlsGet: 'locImageUrlsGet',
+        locImageDataGet: 'locImageDataGet',
         
     }),
 
@@ -39,8 +39,8 @@ export default {
 
     ...mapActions({
 
-		    // Fetches the image urls to be used by the carousel
-        fetchLocImageUrls: 'fetchLocImageUrls',
+		    // Fetches the image data to be used by the carousel
+        fetchLocImageData: 'fetchLocImageData',
 
     }),
 
