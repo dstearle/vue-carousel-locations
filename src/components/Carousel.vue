@@ -16,8 +16,7 @@
                     <!-- Image -->
                     <img 
                         :src="locSpecial.imageUrl" 
-                        alt=""
-                        class=""
+                        :alt="locSpecial.imageAlt"
                         style="width: 100%; max-height: 600px"
                     />
 
@@ -27,8 +26,7 @@
                 <img 
                     v-else
                     :src="locSpecial.imageUrl" 
-                    alt=""
-                    class=""
+                    :alt="locSpecial.imageAlt"
                     style="width: 100%; max-height: 600px"
                 />
 
