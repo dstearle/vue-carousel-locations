@@ -1,7 +1,7 @@
 <template>
 
     <!-- Carousel Component -->
-    <Carousel :locSpecials="this.locImageDataGet"/>
+    <Carousel :locSpecials="this.locImageDataGet" :locSpecialsMobile="this.locImageMobileDataGet"/>
 
 </template>
 
@@ -13,38 +13,47 @@ import { mapGetters, mapActions } from 'vuex';
 
 export default {
 
-  name: 'App',
+  	name: 'App',
 
-  components: { Carousel },
+  	components: { Carousel },
 
-  beforeMount() {
+	beforeMount() {
 
-    // Fetches the image urls to be used by the carousel
-    this.fetchLocImageData();
-	
-  },
+		// Fetches the image urls for desktop to be used by the carousel
+		this.fetchLocImageData();
 
-  computed: {
+		// Fetches the image urls for mobile to be used by the carousel
+		this.fetchLocImageMobileData();
+		
+	},
 
-    ...mapGetters({
-        
-        // Retrieves the state for the retrieved custom post type
-        locImageDataGet: 'locImageDataGet',
-        
-    }),
+  	computed: {
 
-  },
+		...mapGetters({
+			
+			// Retrieves the data for the carousel to be used on desktop
+			locImageDataGet: 'locImageDataGet',
 
-  methods: {
+			// Retrieves the data for the carousel to be used on mobile
+			locImageMobileDataGet: 'locImageMobileDataGet',
+			
+		}),
 
-    ...mapActions({
+	},
 
-		    // Fetches the image data to be used by the carousel
-        fetchLocImageData: 'fetchLocImageData',
+	methods: {
 
-    }),
+		...mapActions({
 
-  },
+			// Fetches the image data for desktop to be used by the carousel
+			fetchLocImageData: 'fetchLocImageData',
+
+			// Fetches the image data for mobile to be used by the carousel
+			fetchLocImageMobileData: 'fetchLocImageMobileData',
+
+		}),
+
+	},
 
 }
 
