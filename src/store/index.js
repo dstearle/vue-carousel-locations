@@ -3,8 +3,11 @@ import { createStore } from 'vuex'
 // State
 const state = {
     
-  // Array to store the image data
+  // Array to store the image data for desktop
   locImageData: '',
+
+  // Array to store the image data for mobile
+  locImageMobileData: '',
   
 };
 
@@ -12,7 +15,7 @@ const state = {
 const mutations = {
 
   // Sets the state data for locImageData
-  'SET_LOCIMAGEDATA' (state) {
+  'SET_LOC_IMAGE_DATA' (state) {
 
     // Searches for the div on the page with an id of "specialsCarouselData"
     const arr = document.getElementById('specialsCarouselData');
@@ -28,6 +31,23 @@ const mutations = {
               
   },
 
+  // Sets the state data for locImageMobileData
+  'SET_LOC_IMAGE_MOBILE_DATA' (state) {
+
+    // Searches for the div on the page with an id of "specialsCarouselMobileData"
+    const arr = document.getElementById('specialsCarouselMobileData');
+
+    // Turns the content of the div into a string
+    const arr2 = arr.textContent;
+
+    // Parses the string into an array
+    const arr3 = JSON.parse(arr2);
+
+    // Sets the state for locImageMobileData with the array
+    state.locImageMobileData = arr3;
+              
+  },
+
 };
 
 // Actions
@@ -37,7 +57,15 @@ const actions = {
   fetchLocImageData: ({ commit }, order) => {
       
     // Commits fetch for custom post type of 'location'
-    commit('SET_LOCIMAGEDATA', order);
+    commit('SET_LOC_IMAGE_DATA', order);
+      
+  },
+
+  // Action for fetching image data for mobile
+  fetchLocImageMobileData: ({ commit }, order) => {
+      
+    // Commits fetch for custom post type of 'location'
+    commit('SET_LOC_IMAGE_MOBILE_DATA', order);
       
   },
 
@@ -50,6 +78,13 @@ const getters = {
   locImageDataGet: state => {
       
     return state.locImageData;
+      
+  },
+
+  // Getter for image data for mobile
+  locImageMobileDataGet: state => {
+      
+    return state.locImageMobileData;
       
   },
 
