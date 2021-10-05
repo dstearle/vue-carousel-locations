@@ -2,33 +2,81 @@
     
     <div class="slideshow-container">
 
+        <!-- Mobile -->
         <!-- For loop to loop through each data object -->
-        <div v-for="(locSpecial, index) in locSpecials" :key="index">
+        <div v-if="windowWidth < 1024">
 
-            <div class="my-slides fade">
+            <div 
+                v-for="(locSpecialMobile, index) in locSpecialsMobile" 
+                :key="index"
+            >
 
-                <!--If a link is provided -->
-                <a 
-                    v-if="locSpecial.imageLink"
-                    :href="locSpecial.imageLink"
-                >
+                <div class="my-slides fade">
 
-                    <!-- Image -->
+                    <!--If a link is provided -->
+                    <a 
+                        v-if="locSpecialMobile.imageLinkMobile"
+                        :href="locSpecialMobile.imageLinkMobile"
+                    >
+
+                        <!-- Image -->
+                        <img 
+                            :src="locSpecialMobile.imageUrlMobile" 
+                            :alt="locSpecialMobile.imageAltMobile"
+                            style="width: 100%; max-height: 600px"
+                        />
+
+                    </a>
+
+                    <!-- Else just show the image -->
                     <img 
+                        v-else
+                        :src="locSpecialMobile.imageUrlMobile" 
+                        :alt="locSpecialMobile.imageAltMobile"
+                        style="width: 100%; max-height: 600px"
+                    />
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Desktop -->
+        <!-- For loop to loop through each data object -->
+        <div v-else>
+
+            <div 
+                v-for="(locSpecial, index) in locSpecials" 
+                :key="index"
+            >
+
+                <div class="my-slides fade">
+
+                    <!--If a link is provided -->
+                    <a 
+                        v-if="locSpecial.imageLink"
+                        :href="locSpecial.imageLink"
+                    >
+
+                        <!-- Image -->
+                        <img 
+                            :src="locSpecial.imageUrl" 
+                            :alt="locSpecial.imageAlt"
+                            style="width: 100%; max-height: 600px"
+                        />
+
+                    </a>
+
+                    <!-- Else just show the image -->
+                    <img 
+                        v-else
                         :src="locSpecial.imageUrl" 
                         :alt="locSpecial.imageAlt"
                         style="width: 100%; max-height: 600px"
                     />
 
-                </a>
-
-                <!-- Else just show the image -->
-                <img 
-                    v-else
-                    :src="locSpecial.imageUrl" 
-                    :alt="locSpecial.imageAlt"
-                    style="width: 100%; max-height: 600px"
-                />
+                </div>
 
             </div>
 
@@ -57,7 +105,7 @@
 
         },
 
-        props: ["locSpecials"],
+        props: ["locSpecials", "locSpecialsMobile"],
 
         data() {
 
@@ -65,29 +113,28 @@
 
                 slideIndex: 0,
                 interval: setInterval(() => this.showSlides(this.slideIndex += 1), 6000),
-                loaded: false
-
+                loaded: false,
+                
             };
             
         },
 
         computed: {
 
-            // The filtered list based off of selected tag
-            filteredList() {
+            windowWidth() {
 
-                // Array to hold the array if image urls
-                const arr = this.locSpecials;
+                return this.$store.state.windowWidth;
 
-                // If the data has been fetched
-                if(arr) {
+            },
 
-                    return arr
-                    
-                }
-                
-                // Else wait till the data is fetched
-                else {}
+        },
+
+        watch: {
+
+            windowWidth() {
+
+                // Sets the initial slide to be shown
+                this.showSlides(this.slideIndex);
 
             }
 
@@ -200,20 +247,6 @@
     @keyframes fade {
         from {opacity: .4}
         to {opacity: 1}
-    }
-
-    @media only screen and (max-width: 1024px) {
-
-        .my-slide-desktop { display: none; }
-        .my-slide-mobile { display: block; }
-
-    }
-
-    @media only screen and (min-width: 1024px) {
-
-        .my-slide-desktop { display: block; }
-        .my-slide-mobile { display: none; }
-
     }
 
 </style>
