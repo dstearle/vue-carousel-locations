@@ -9,6 +9,7 @@ const state = {
 	// Array to store the image data for mobile
 	locImageMobileData: '',
 
+	// The current width of the window
 	windowWidth: window.innerWidth,
   
 };
@@ -50,6 +51,7 @@ const mutations = {
               
 	},
 
+	// Sets the state for windwWidth
 	setWindowWidth(state) {
 
   		state.windowWidth = window.innerWidth;

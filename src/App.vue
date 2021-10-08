@@ -19,6 +19,7 @@ export default {
 
 	created() {
 
+		// The initial width of the window
 		window.addEventListener('resize', () => {
 
 			this.$store.commit('setWindowWidth');
@@ -65,12 +66,6 @@ export default {
 			
 		}),
 
-		windowWidth() {
-
-			return this.$store.state.windowWidth;
-
-		}
-
 	},
 
 	methods: {
@@ -84,12 +79,6 @@ export default {
 			fetchLocImageMobileData: 'fetchLocImageMobileData',
 
 		}),
-
-		handleResize() {
-
-			return this.window.width = window.innerWidth;
-			
-		},
 
 	},
 

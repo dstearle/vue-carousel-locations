@@ -3,9 +3,9 @@
     <div class="slideshow-container">
 
         <!-- Mobile -->
-        <!-- For loop to loop through each data object -->
         <div v-if="windowWidth < 1024">
 
+            <!-- For loop to loop through each data object -->
             <div 
                 v-for="(locSpecialMobile, index) in locSpecialsMobile" 
                 :key="index"
@@ -43,9 +43,9 @@
         </div>
 
         <!-- Desktop -->
-        <!-- For loop to loop through each data object -->
         <div v-else>
 
+            <!-- For loop to loop through each data object -->
             <div 
                 v-for="(locSpecial, index) in locSpecials" 
                 :key="index"
@@ -121,6 +121,7 @@
 
         computed: {
 
+            // Returns the current width of the window
             windowWidth() {
 
                 return this.$store.state.windowWidth;
@@ -131,6 +132,7 @@
 
         watch: {
 
+            // Watches for changes in windowWidth
             windowWidth() {
 
                 // Sets the initial slide to be shown
