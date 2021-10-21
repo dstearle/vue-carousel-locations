@@ -1,92 +1,87 @@
 <template>
     
-    <div class="slideshow-container">
+    <div class="carousel-container">
 
-        <!-- Mobile -->
-        <div v-if="windowWidth < 1024">
+        <!-- Vue Transitions -->
+        <transition-group
+            class='carousel'
+            tag="div"
+        >
 
-            <!-- For loop to loop through each data object -->
-            <div 
-                v-for="(locSpecialMobile, index) in locSpecialsMobile" 
-                :key="index"
+            <!-- Carousel Slides -->
+            <div
+                v-for="slide in formattedSlides" 
+                class='slide'
+                :class="[slidesDirection ? 'next-transition' : 'prev-transition']"
+                :key="slide.id"
             >
 
-                <div class="my-slides fade">
+                <div style="width: 100%; max-height: 600px">
 
-                    <!--If a link is provided -->
+                    <!-- Desktop -->
                     <a 
-                        v-if="locSpecialMobile.imageLinkMobile"
-                        :href="locSpecialMobile.imageLinkMobile"
+                        v-if="slide.imageLink"
+                        :href="slide.imageLink"
                     >
 
-                        <!-- Image -->
                         <img 
-                            :src="locSpecialMobile.imageUrlMobile" 
-                            :alt="locSpecialMobile.imageAltMobile"
+                            :src="slide.imageUrl"
+                            :alt="slide.imageAlt" 
+                            class="my-slide-desktop"
                             style="width: 100%; max-height: 600px"
-                        />
+                        >
 
                     </a>
 
-                    <!-- Else just show the image -->
+                    <!-- If no Link is Provided for Desktop -->
                     <img 
                         v-else
-                        :src="locSpecialMobile.imageUrlMobile" 
-                        :alt="locSpecialMobile.imageAltMobile"
+                        :src="slide.imageUrl"
+                        :alt="slide.imageAlt" 
+                        class="my-slide-desktop"
                         style="width: 100%; max-height: 600px"
-                    />
+                    >
+
+                    <!-- Mobile -->
+                    <a 
+                        v-if="slide.imageLinkMobile"
+                        :href="slide.imageLinkMobile"
+                    >
+
+                        <img 
+                            :src="slide.imageUrlMobile"
+                            :alt="slide.imageAltMobile" 
+                            class="my-slide-mobile"
+                            style="width: 100%; max-height: 600px"
+                        >
+
+                    </a>
+
+                    <!-- If no Link is Provided for Mobile -->
+                    <img 
+                        v-else
+                        :src="slide.imageUrlMobile"
+                        :alt="slide.imageAltMobile" 
+                        class="my-slide-mobile"
+                        style="width: 100%; max-height: 600px"
+                    >
 
                 </div>
 
             </div>
 
-        </div>
+        </transition-group>
 
-        <!-- Desktop -->
-        <div v-else>
+        <!-- Carousel Arrows -->
+        <div class="carousel-arrows">
+            
+            <!-- PreviousNext Button -->
+            <a class="prev" @click="previous">&#10094;</a>
 
-            <!-- For loop to loop through each data object -->
-            <div 
-                v-for="(locSpecial, index) in locSpecials" 
-                :key="index"
-            >
-
-                <div class="my-slides fade">
-
-                    <!--If a link is provided -->
-                    <a 
-                        v-if="locSpecial.imageLink"
-                        :href="locSpecial.imageLink"
-                    >
-
-                        <!-- Image -->
-                        <img 
-                            :src="locSpecial.imageUrl" 
-                            :alt="locSpecial.imageAlt"
-                            style="width: 100%; max-height: 600px"
-                        />
-
-                    </a>
-
-                    <!-- Else just show the image -->
-                    <img 
-                        v-else
-                        :src="locSpecial.imageUrl" 
-                        :alt="locSpecial.imageAlt"
-                        style="width: 100%; max-height: 600px"
-                    />
-
-                </div>
-
-            </div>
+            <!-- Next Button -->
+            <a class="next" @click="next">&#10095;</a>
 
         </div>
-        
-        <!-- Next Button -->
-        <a class="prev" @click="plusSlides(-1)">&#10094;</a>
-
-        <!-- Previous Button -->
-        <a class="next" @click="plusSlides(1)">&#10095;</a>
 
     </div>
     
@@ -96,92 +91,117 @@
 
     export default {
 
-        mounted() {
+        created() {
 
-            // Sets the initial slide to be shown
-            this.showSlides(this.slideIndex);
-
-            this.loaded = true
+            // Formats the retrieved list
+            this.formatSlideList();
 
         },
 
-        props: ["locSpecials", "locSpecialsMobile"],
+        mounted() {
+
+            // Sets the interval between slides
+            setInterval(() => this.next(), 6000);
+
+        },
+
+        props: ["locSpecials"],
 
         data() {
 
             return {
 
-                slideIndex: 0,
-                interval: setInterval(() => this.showSlides(this.slideIndex += 1), 6000),
-                loaded: false,
+                slidesDirection: true,
+                formattedSlides: []
                 
             };
             
         },
 
-        computed: {
-
-            // Returns the current width of the window
-            windowWidth() {
-
-                return this.$store.state.windowWidth;
-
-            },
-
-        },
-
-        watch: {
-
-            // Watches for changes in windowWidth
-            windowWidth() {
-
-                // Sets the initial slide to be shown
-                this.showSlides(this.slideIndex);
-
-            }
-
-        },
-
         methods: {
 
-            // The controls for the "Next" and "Previous" buttons
-            plusSlides(n) { 
-                
-                this.showSlides(this.slideIndex += n);
-                clearInterval(this.interval);
+            // Displays next slide in carousel
+            next() {
+
+                // Sets css class for proper slide transition
+                this.slidesDirection = true;
+
+                const first = this.formattedSlides.shift();
+                this.formattedSlides = this.formattedSlides.concat(first);
 
             },
 
-            // Thumbnail image controls
-            currentSlide(n) {
+            // Displays previous slide in carousel
+            previous() {
 
-                this.showSlides(this.slideIndex = n);
+                // Sets css class for proper slide transition
+                this.slidesDirection = false;
+
+                const last = this.formattedSlides.pop();
+                this.formattedSlides = [last].concat(this.formattedSlides);
 
             },
 
-            // Triggers the carousel slide when the "Next" or "Previous" buttons are clicked
-            showSlides(n) {
+            // Used for making copies of existing array objects
+            deepCopy(obj) {
 
-                // Retrieves all elements with the class of "mySlides"
-                const slides = document.getElementsByClassName("my-slides");
+                return JSON.parse(JSON.stringify(obj));
 
-                // If user clicks Next
-                if (n > slides.length) {this.slideIndex = 1}
+            },
 
-                // If user clicks Previous
-                if (n < 1) {this.slideIndex = slides.length}
+            // Formats the slides into the correct order
+            formatSlideList() {
 
-                // for loops to set all other indexed slides that are not the current index to hidden
-                for (let i = 0; i < slides.length; i++) {
+                // Array of slides
+                const arr = this.locSpecials;
 
-                    slides[i].style.display = "none";
+                // If the length of the array of slides is even, add a "dummy" slide so that the length is odd and format the new array
+                if(arr.length % 2 == 0) {
+
+                    // Create a deep copy of the second index to use as a "dummy" slide
+                    const secondIndex = this.deepCopy(arr[1]);
+                    // Change the id of secondIndex to a thousand so that the id is unique
+                    secondIndex.id = 1000;
+
+                    // Push "dummy" slide into array
+                    arr.push(secondIndex);
+
+                    // Find the middle of the array
+                    const arrCenter = Math.floor(arr.length / 2);
+
+                    // Find the first half of the array
+                    const arrFirstHalf = arr.slice(0, arrCenter + 1);
+                    // Find the second half of the array
+                    const arrSecondHalf = arr.slice(arrCenter + 1, arr.length);
+
+                    // Concat the first half of the array to the end of the second half so the original first index is now in the center
+                    const arr2 = arrSecondHalf.concat(arrFirstHalf);
+
+                    // Return the formatted slides to be used in the carousel
+                    this.formattedSlides = arr2;
 
                 }
 
-                // Sets the current indexed slide to display
-                slides[this.slideIndex-1].style.display = "block";
-                
-            },
+                // Else format the array as intended
+                else {
+
+                    // Find the middle of the array
+                    const arrCenter = Math.floor(arr.length / 2);
+
+                    // Find the first half of the array
+                    const arrFirstHalf = arr.slice(0, arrCenter + 1);
+                    // Find the second half of the array
+                    const arrSecondHalf = arr.slice(arrCenter + 1, arr.length);
+
+                    // Concat the first half of the array to the end of the second half so the original first index is now in the center
+                    const arr2 = arrSecondHalf.concat(arrFirstHalf);
+
+                    // Return the formatted slides to be used in the carousel
+                    this.formattedSlides = arr2;
+
+                }
+
+            }
             
         },
 
@@ -191,30 +211,42 @@
 
 <style scoped>
 
-    * {box-sizing:border-box}
-
-    /* Slideshow container */
-    .slideshow-container {
+    .carousel-container {
         position: relative;
+        flex-direction: column;
+        align-items: center;
     }
 
-    /* Hide the images by default */
-    .my-slides {
-        display: none;
+    .carousel {
+        display: flex;
+        justify-content: center;
     }
 
-    .my-slides img {
-        height: auto;
+    .slide {
+        flex: 0 0 100%;
         width: 100%;
+        max-height: 600px;
+        transition: transform 0.5s ease-in-out;
+    }
+
+    .prev-transition:first-of-type {
+        opacity: 0;
+    }
+
+    .next-transition:last-of-type {
+        opacity: 0;
+    }
+
+    .carousel-arrows {
+        width: 100%;
+        height: 100%;
     }
 
     /* Next & previous buttons */
-        .prev, .next {
+    .prev, .next {
         cursor: pointer;
         position: absolute;
         top: 50%;
-        width: auto;
-        margin-top: -22px;
         padding: 16px;
         color: white;
         font-weight: bold;
@@ -233,22 +265,19 @@
     /* On hover, add a black background color with a little bit see-through */
     .prev:hover, .next:hover { background-color: rgba(0,0,0,0.8); }
 
-    /* Fading animation */
-    .fade {
-        -webkit-animation-name: fade;
-        -webkit-animation-duration: 1.5s;
-        animation-name: fade;
-        animation-duration: 1.5s;
+    /* Media Queries for Images */
+     @media only screen and (max-width: 1024px) {
+
+        .my-slide-desktop { display: none; }
+        .my-slide-mobile { display: block; }
+
     }
 
-    @-webkit-keyframes fade {
-        from {opacity: .4}
-        to {opacity: 1}
-    }
+    @media only screen and (min-width: 1024px) {
 
-    @keyframes fade {
-        from {opacity: .4}
-        to {opacity: 1}
+        .my-slide-desktop { display: block; }
+        .my-slide-mobile { display: none; }
+
     }
 
 </style>
