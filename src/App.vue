@@ -1,7 +1,7 @@
 <template>
 
     <!-- Carousel Component -->
-    <Carousel :locSpecials="this.locImageDataGet" :locSpecialsMobile="this.locImageMobileDataGet" :windowWith="this.windowWidth"/>
+    <Carousel :locSpecials="this.locImageDataGet" />
 
 </template>
 
@@ -17,40 +17,10 @@ export default {
 
   	components: { Carousel },
 
-	created() {
-
-		// The initial width of the window
-		window.addEventListener('resize', () => {
-
-			this.$store.commit('setWindowWidth');
-
-		})
-
-	},
-
-	destroyed() {
-
-        window.removeEventListener();
-
-    },
-
 	beforeMount() {
 
 		// Fetches the image urls for desktop to be used by the carousel
 		this.fetchLocImageData();
-
-		// Fetches the image urls for mobile to be used by the carousel
-		this.fetchLocImageMobileData();
-		
-	},
-
-	data() {
-
-		return {
-
-			window: { width: 0 }
-			
-		};
 		
 	},
 
@@ -60,9 +30,6 @@ export default {
 			
 			// Retrieves the data for the carousel to be used on desktop
 			locImageDataGet: 'locImageDataGet',
-
-			// Retrieves the data for the carousel to be used on mobile
-			locImageMobileDataGet: 'locImageMobileDataGet',
 			
 		}),
 
@@ -74,9 +41,6 @@ export default {
 
 			// Fetches the image data for desktop to be used by the carousel
 			fetchLocImageData: 'fetchLocImageData',
-
-			// Fetches the image data for mobile to be used by the carousel
-			fetchLocImageMobileData: 'fetchLocImageMobileData',
 
 		}),
 
