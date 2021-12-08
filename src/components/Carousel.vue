@@ -213,6 +213,7 @@
 
     .carousel-container {
         position: relative;
+        overflow: hidden;
         flex-direction: column;
         align-items: center;
     }
